@@ -1,6 +1,24 @@
 package org.example;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class ZadaniaElfow {
+    public static String[] odczytajDaneZPliku(String fileName) {
+        try (Scanner scanner = new Scanner(new File(fileName))) {
+            java.util.List<String> lines = new java.util.ArrayList<>();
+
+            while (scanner.hasNextLine()) {
+                lines.add(scanner.nextLine());
+            }
+
+            return lines.toArray(new String[0]);
+        } catch (FileNotFoundException e) {
+            System.err.println("Błąd: Plik nie został znaleziony: " + e.getMessage());
+            return null;
+        }
+    }
 
     public static boolean CzyJedenJestWDrugim(String range1, String range2) {
         String[] parts1 = range1.split("-");
